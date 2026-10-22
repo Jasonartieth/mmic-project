@@ -1,0 +1,21 @@
+# Python and local build artifacts
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+# Experiment artifacts and machine-local configuration
+outputs/
+runs/
+run-logs/
+checkpoints/
+__nyx_cache__/
+.env
+.env.*
+!.env.example
+
+# uv.lock is intentionally tracked for reproducible environments.
