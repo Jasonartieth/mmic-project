@@ -15,11 +15,8 @@ Install [uv](https://docs.astral.sh/uv/), then select the extra for the machine:
 # AMD / Linux (ROCm 7.2.4 wheels, as in SRT2)
 uv sync --extra rocm
 
-# NVIDIA (CUDA 13.0 wheels, as in SRT2)
+# NVIDIA (CUDA 13.0 wheels and Nyx path tracing)
 uv sync --extra cuda
-
-# NVIDIA with Nyx path tracing
-uv sync --extra cuda --extra nyx
 
 # Apple Silicon (PyTorch MPS / Genesis Metal)
 uv sync --extra metal
@@ -47,11 +44,11 @@ run compiles simulation kernels. It does not load robot assets or control hardwa
 
 ## Nyx rendering
 
-Nyx is an optional NVIDIA renderer, installed alongside the CUDA extra:
+The CUDA extra includes the Nyx renderer:
 
 ```sh
-uv sync --extra cuda --extra nyx
-uv run --extra cuda --extra nyx mmic-nyx-smoke
+uv sync --extra cuda
+uv run --extra cuda mmic-nyx-smoke
 ```
 
 The headless check renders a falling red box with Nyx's FastPathTracer, verifies
@@ -60,7 +57,7 @@ height, and writes `initial.png`, `settled.png`, and `result.json` under
 `outputs/nyx-smoke/`. It uses procedural geometry and a directional light, so no
 external assets are needed. Nyx requires an NVIDIA GPU and driver 575 or newer;
 see the [Nyx installation guide](https://genesis-embodied-ai.github.io/genesis-nyx/latest/user_guide/installation.html).
-The Nyx extra conflicts with ROCm and Metal.
+CUDA (including Nyx), ROCm, and Metal remain mutually exclusive.
 
 ## Layout
 

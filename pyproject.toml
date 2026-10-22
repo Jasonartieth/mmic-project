@@ -14,10 +14,15 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-cuda = ["torch", "triton; sys_platform == 'linux'", "onnxruntime-gpu"]
+cuda = [
+    "torch",
+    "triton; sys_platform == 'linux'",
+    "onnxruntime-gpu",
+    "gs-nyx-plugin==0.1.10",
+    "gs-nyx==0.1.8",
+]
 rocm = ["torch", "triton", "onnxruntime-migraphx"]
 metal = ["torch", "onnxruntime"]
-nyx = ["gs-nyx-plugin==0.1.10", "gs-nyx==0.1.8"]
 
 [project.scripts]
 mmic-smoke = "mmic_project.smoke:main"
@@ -35,8 +40,6 @@ conflicts = [
     [{ extra = "cuda" }, { extra = "rocm" }],
     [{ extra = "cuda" }, { extra = "metal" }],
     [{ extra = "rocm" }, { extra = "metal" }],
-    [{ extra = "nyx" }, { extra = "rocm" }],
-    [{ extra = "nyx" }, { extra = "metal" }],
 ]
 
 # Genesis is resolved from PyPI; no local fork or Git submodule is required.
