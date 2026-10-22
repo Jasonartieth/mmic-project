@@ -13,9 +13,9 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=Path("outputs/nyx-smoke"))
     args = parser.parse_args()
 
+    print("Loading Genesis and Nyx...", flush=True)
     import genesis as gs
     import gs_nyx.nyx_py_renderer as renderer
-    import gs_nyx.nyx_py_sdk as sdk
     import torch
     from gs_nyx_plugin.nyx_camera_options import NyxCameraOptions
     from PIL import Image
@@ -26,6 +26,7 @@ def main() -> None:
         raise RuntimeError("This check requires the upstream Genesis registry release")
 
     args.output.mkdir(parents=True, exist_ok=True)
+    print(f"Initializing CUDA on {torch.cuda.get_device_name()}...", flush=True)
     gs.init(backend=gs.cuda, seed=0, logging_level="warning")
     try:
         world = gs.Scene(sim_options=gs.options.SimOptions(dt=0.01), show_viewer=False)
@@ -34,11 +35,6 @@ def main() -> None:
             gs.morphs.Box(pos=(0.0, 0.0, 0.45), size=(0.16, 0.16, 0.16)),
             surface=gs.surfaces.Rough(color=(0.85, 0.12, 0.05, 1.0)),
         )
-        sunlight = sdk.LightAsset()
-        sunlight.type = sdk.ELightType.Directional
-        sunlight.directional_direction = (-0.5, -0.3, -1.0)
-        sunlight.color = (1.0, 1.0, 1.0)
-        sunlight.intensity = 5.0
         camera = world.add_sensor(NyxCameraOptions(
             res=(320, 240),
             pos=(1.1, -1.1, 0.9),
@@ -46,8 +42,14 @@ def main() -> None:
             fov=45.0,
             spp=16,
             render_mode=renderer.ERenderMode.FastPathTracer,
-            lights=(sunlight,),
+            lights=[{
+                "type": "directional",
+                "dir": (-0.5, -0.3, -1.0),
+                "color": (1.0, 1.0, 1.0),
+                "intensity": 5.0,
+            }],
         ))
+        print("Building the physics scene and Nyx renderer...", flush=True)
         world.build(n_envs=1)
         frames = []
         for step in range(61):
@@ -59,6 +61,7 @@ def main() -> None:
                 raise RuntimeError(f"Unexpected Nyx output: {pixels.shape}, {pixels.dtype}, {pixels.device}")
             rgb_device = str(pixels.device)
             frames.append(pixels[0].cpu().clone())
+            print(f"Rendered Nyx frame after step {step + 1}.", flush=True)
         for label, pixels in zip(("initial", "settled"), frames, strict=True):
             Image.fromarray(pixels.numpy()).save(args.output / f"{label}.png")
 

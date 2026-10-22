@@ -59,6 +59,10 @@ external assets are needed. Nyx requires an NVIDIA GPU and driver 575 or newer;
 see the [Nyx installation guide](https://genesis-embodied-ai.github.io/genesis-nyx/latest/user_guide/installation.html).
 CUDA (including Nyx), ROCm, and Metal remain mutually exclusive.
 
+On `A843-2x4090`, run with `CUDA_VISIBLE_DEVICES=1` to align CUDA with Nyx's
+selected physical GPU. See [the recorded render validation](docs/nyx-validation.md)
+for the tested command and results.
+
 ## Layout
 
 - `src/mmic_project/`: project Python package; simulation and sim-to-real code goes here.
