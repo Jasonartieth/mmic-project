@@ -63,6 +63,25 @@ On `A843-2x4090`, run with `CUDA_VISIBLE_DEVICES=1` to align CUDA with Nyx's
 selected physical GPU. See [the recorded render validation](docs/nyx-validation.md)
 for the tested command and results.
 
+## Depth sensing
+
+Use Genesis's native `gs.sensors.DepthCamera` for metric depth alongside Nyx RGB.
+It casts a batched pinhole ray grid against scene geometry. See the
+[raycaster documentation](https://genesis-world.readthedocs.io/en/latest/user_guide/sensing/raycaster.html).
+
+```sh
+uv run --locked --extra cuda python -m mmic_project.depth_smoke
+```
+
+The check reads four CUDA depth images at 320×240, compares every pixel with
+analytic box intersections, moves the foreground object 0.5 m, and verifies the
+updated images and no-hit values. It saves raw measurements in `depth.npz`, a
+preview in `depth-preview.png`, and checks in `result.json` under
+`outputs/depth-camera/`. Native measurements are **along-ray ranges in meters**;
+the NPZ also contains derived camera-axis depth with misses marked NaN.
+This diagnostic uses the Genesis sensor independently of the Nyx RGB renderer.
+See [the server validation](docs/depth-validation.md) for the command and measurements.
+
 ## Layout
 
 - `src/mmic_project/`: project Python package; simulation and sim-to-real code goes here.
