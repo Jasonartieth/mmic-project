@@ -16,7 +16,7 @@ CUDA_VISIBLE_DEVICES=1 \
 TMPDIR="$HOME/diskstation/uv-cache/tmp" \
 XDG_CACHE_HOME="$PWD/outputs/cache" \
 MPLCONFIGDIR="$PWD/outputs/cache/matplotlib" \
-uv run --locked --extra cuda python -u -m mmic_project.depth_smoke
+uv run --locked --extra cuda python -u src/scripts/smoke/depth_smoke.py
 ```
 
 The world-fixed sensor points along +X from `(0, 0, 1)` m, with a 90-degree

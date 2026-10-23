@@ -24,16 +24,13 @@ cuda = [
 rocm = ["torch", "triton", "onnxruntime-migraphx"]
 metal = ["torch", "onnxruntime"]
 
-[project.scripts]
-mmic-smoke = "mmic_project.smoke:main"
-mmic-nyx-smoke = "mmic_project.nyx_smoke:main"
-
 [build-system]
 requires = ["setuptools>=77,<80"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["mmic_project*"]
 
 [tool.uv]
 conflicts = [

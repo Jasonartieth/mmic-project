@@ -32,10 +32,10 @@ uses the default PyPI PyTorch build; this may include CUDA dependencies on Linux
 
 ```sh
 # Headless CPU physics check using the installed ROCm environment
-uv run --extra rocm mmic-smoke
+uv run --extra rocm python src/scripts/smoke/smoke.py
 
 # Check the machine's GPU backend
-uv run --extra rocm mmic-smoke --backend gpu
+uv run --extra rocm python src/scripts/smoke/smoke.py --backend gpu
 ```
 
 Substitute `cuda` or `metal` when using those environments. The check drops a
@@ -48,7 +48,7 @@ The CUDA extra includes the Nyx renderer:
 
 ```sh
 uv sync --extra cuda
-uv run --extra cuda mmic-nyx-smoke
+uv run --extra cuda python src/scripts/smoke/nyx_smoke.py
 ```
 
 The headless check renders a falling red box with Nyx's FastPathTracer, verifies
@@ -70,7 +70,7 @@ It casts a batched pinhole ray grid against scene geometry. See the
 [raycaster documentation](https://genesis-world.readthedocs.io/en/latest/user_guide/sensing/raycaster.html).
 
 ```sh
-uv run --locked --extra cuda python -m mmic_project.depth_smoke
+uv run --locked --extra cuda python src/scripts/smoke/depth_smoke.py
 ```
 
 The check reads four CUDA depth images at 320×240, compares every pixel with
@@ -85,8 +85,10 @@ See [the server validation](docs/depth-validation.md) for the command and measur
 ## Layout
 
 - `src/mmic_project/`: project Python package; simulation and sim-to-real code goes here.
-- `pyproject.toml`: dependencies, GPU indexes, and the `mmic-smoke` command.
-- `outputs/`, `runs/`, `run-logs/`, `checkpoints/`: ignored experiment artifacts.
+- `src/scripts/smoke/`: reusable, standalone smoke checks, run directly by file path.
+- `runs/`: one-time scripts and local experiments; ignored by Git and never tracked.
+- `pyproject.toml`: dependencies and GPU indexes.
+- `outputs/`, `run-logs/`, `checkpoints/`: ignored experiment artifacts.
 
 Robot tasks, hardware adapters, and training algorithms can be added as the first
 experiment is defined.

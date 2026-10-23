@@ -13,7 +13,7 @@ uv sync --locked --extra cuda
 CUDA_VISIBLE_DEVICES=1 \
 TMPDIR="$HOME/diskstation/uv-cache/tmp" \
 XDG_CACHE_HOME="$PWD/outputs/cache" \
-uv run --locked --extra cuda mmic-nyx-smoke --output outputs/nyx-smoke-gpu1
+uv run --locked --extra cuda python src/scripts/smoke/nyx_smoke.py --output outputs/nyx-smoke-gpu1
 ```
 
 The command completed with exit code 0 and no Nyx denoiser or cleanup warnings.
