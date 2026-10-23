@@ -36,7 +36,7 @@ def main():
     import numpy as np
     import genesis as gs
 
-    urdf = ROOT / "assets/qarm-community/urdf/qarm_with_gripper.urdf"
+    urdf = ROOT / "assets/qarm-community/qarm_with_gripper.urdf"
     if not urdf.is_file():
         parser.error(f"Missing community model: {urdf}")
     dt = 0.01
