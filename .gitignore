@@ -19,3 +19,4 @@ __nyx_cache__/
 !.env.example
 
 # uv.lock is intentionally tracked for reproducible environments.
+refs/
