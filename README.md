@@ -90,5 +90,39 @@ See [the server validation](docs/depth-validation.md) for the command and measur
 - `pyproject.toml`: dependencies and GPU indexes.
 - `outputs/`, `run-logs/`, `checkpoints/`: ignored experiment artifacts.
 
+## QArm gripper viewer
+
+The sole QArm model is the community version in `assets/qarm-community/`.
+Open a Genesis window and repeatedly open/close the gripper:
+
+```sh
+uv run --extra rocm python src/scripts/qarm/gripper_demo.py
+```
+
+Use the extra matching your existing environment. On Windows, a standalone
+Python 3.12 environment can run the viewer without the project's GPU extras:
+
+```powershell
+uv run --no-project --python 3.12 --with genesis-world==1.4.4 python src/scripts/qarm/gripper_demo.py
+```
+
+The default uses CPU physics; add `--backend gpu` to select GPU physics.
+Close the window or press Ctrl+C to stop. `--cycles 3` runs three cycles;
+`--period 6` slows each open/close cycle to six seconds. For a headless check,
+add `--headless --cycles 2`.
+
+One scalar (default range 0.1 to 0.9) drives four finger position targets using
+`[-0.45, -0.35, +0.45, -0.35]` radians, with 0.2 s smoothing. This first-pass
+mapping has not been calibrated for the community model. The viewer disables
+gravity and collisions, recomputes placeholder inertias, and applies demo-only
+position-controller gains/force limits; it is for motion inspection rather than
+grasp dynamics. No hardware connection is used.
+
+Validated on Linux with upstream Genesis 1.4.4 and CPU physics: headless and
+viewer-window runs each completed two cycles (800 steps), with all four finger
+joints moving and finite states throughout. The Windows launch command is
+provided above; Windows execution has not been tested here. The original dense
+STLs trigger Genesis's fallback URDF parser and mesh-inertia warnings.
+
 Robot tasks, hardware adapters, and training algorithms can be added as the first
 experiment is defined.

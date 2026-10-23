@@ -1,0 +1,74 @@
+{
+  "repository": "https://github.com/Georgiaac3/qarm-rl",
+  "commit": "d13dfeb0fa47b1288bf91a77e0e06bf11227d20c",
+  "urdf_source_path": "genesis/QARM/urdf/qarm_with_gripper.urdf",
+  "original_urdf_sha256": "227cd040860fdd0817aec8c3cced157f1812e7c8cd46e138ccf0e11b15ba584a",
+  "mesh_path_fixes": {
+    "../meshes/Link1A.STL": "../meshes/LINK1A.STL",
+    "../meshes/Link2A.STL": "../meshes/LINK2A.STL",
+    "../meshes/Link1B.STL": "../meshes/LINK1B.STL",
+    "../meshes/Link2B.STL": "../meshes/LINK2B.STL"
+  },
+  "files": [
+    {
+      "path": "meshes/BICEP.STL",
+      "source_path": "genesis/QARM/meshes/BICEP.STL",
+      "bytes": 794284,
+      "sha256": "82af30547267b10d26a8192c53fbc19b531acaa2313c7c9d6b75e93246538ac8"
+    },
+    {
+      "path": "meshes/END-EFFECTOR.STL",
+      "source_path": "genesis/QARM/meshes/END-EFFECTOR.STL",
+      "bytes": 239184,
+      "sha256": "619be7bc4fae5829fbaa10b64c9d1c32bb4dd09eb81a65f9434101abbd043827"
+    },
+    {
+      "path": "meshes/FOREARM.STL",
+      "source_path": "genesis/QARM/meshes/FOREARM.STL",
+      "bytes": 4103834,
+      "sha256": "511b993971e7d5ec2887b86edacefebc0a7dfae5931820ae5d2d7810476e2f5b"
+    },
+    {
+      "path": "meshes/LINK1A.STL",
+      "source_path": "genesis/QARM/meshes/LINK1A.STL",
+      "bytes": 6916984,
+      "sha256": "5126584aaf2fa3bfb83cd7cd095f2cddd52742e74a0d729815a2b8488c970dc9"
+    },
+    {
+      "path": "meshes/LINK1B.STL",
+      "source_path": "genesis/QARM/meshes/LINK1B.STL",
+      "bytes": 5379184,
+      "sha256": "d056aa7f063b0146c4742d47d98af1bb6cc84d0e832e796e95692bdd8705ad19"
+    },
+    {
+      "path": "meshes/LINK2A.STL",
+      "source_path": "genesis/QARM/meshes/LINK2A.STL",
+      "bytes": 2506384,
+      "sha256": "7b7b40d5db5afa1f59486fbee4bf346beb541040724900ef151a07b554c0b20f"
+    },
+    {
+      "path": "meshes/LINK2B.STL",
+      "source_path": "genesis/QARM/meshes/LINK2B.STL",
+      "bytes": 2506384,
+      "sha256": "93f1fb85d2061ddc10d5653900420b3900c312ee0bb8c2f379dfe467cb9cca5b"
+    },
+    {
+      "path": "meshes/YAW.STL",
+      "source_path": "genesis/QARM/meshes/YAW.STL",
+      "bytes": 2469884,
+      "sha256": "7f07b975f5b8fa335cc35e37d07a42de461231d5a531509163c8ffbbd714dd56"
+    },
+    {
+      "path": "meshes/base_link.STL",
+      "source_path": "genesis/QARM/meshes/base_link.STL",
+      "bytes": 10554084,
+      "sha256": "21f7f766038101237338ad12e85ec364ebd069962005641ed70a4e5796ea6450"
+    },
+    {
+      "path": "meshes/gripper_base_link.STL",
+      "source_path": "genesis/QARM/meshes/gripper_base_link.STL",
+      "bytes": 23076984,
+      "sha256": "80106fa7dbed06ccdd5480d58b46b66f20f526df6be86d0995d278ed8883be79"
+    }
+  ]
+}
